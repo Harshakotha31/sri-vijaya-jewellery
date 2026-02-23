@@ -20,7 +20,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 
 <div class="nav-actions">
-    <a href="https://instagram.com/srivijayalakshmisilver"
+    <a href="https://instagram.com/sri_vijayalakshmi_silver_/"
        class="insta-btn" target="_blank">
        <i class="fab fa-instagram"></i> Instagram
     </a>
@@ -40,27 +40,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     Follow us on Instagram for more updates ✨
     </p>
 
-    <div class="rate-box">
-        <h3>📊 Today's Gold & Silver Rate</h3>
-       <p id="goldRate">
-Gold 22K (1g):
-{% if gold_rate %}
-₹{{ gold_rate }}
-{% else %}
-Updating...
-{% endif %}
-</p>
-
-<p id="silverRate">
-Silver 999 (1g):
-{% if silver_rate %}
-₹{{ silver_rate }}
-{% else %}
-Updating...
-{% endif %}
-</p>
-    </div>
-<section class="products">
+   <section class="products">
     <h2>Our Silver Collections</h2>
 
     <div class="product-grid">
@@ -96,24 +76,7 @@ style="border:0;">
 <footer>
 <p>© 2026 Sri Vijaya Lakshmi Silver Palace & Jewellery</p>
 </footer>
-<script>
-async function loadRates(){
-    try{
-        const gold = (6200 + Math.floor(Math.random()*50));
-        const silver = (75 + Math.floor(Math.random()*3));
 
-        document.getElementById("goldRate").innerText =
-            "Gold (22K/gram): ₹" + gold;
-
-        document.getElementById("silverRate").innerText =
-            "Silver (1g): ₹" + silver;
-    }catch(e){
-        console.log("Rate load error");
-    }
-}
-loadRates();
-setInterval(loadRates, 60000);
-</script>
 
 </script>
 </body>
