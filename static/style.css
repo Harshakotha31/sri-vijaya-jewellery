@@ -58,9 +58,37 @@ justify-content:center;
 .hero h1{
 font-size:28px;
 }
+.products h3,
+.products p,
+.product-card h3{
+color:#000 !important;
+font-weight:600;
+}
+.product-card{
+background:#ffffff;
+border-radius:16px;
+padding:15px;
+box-shadow:0 8px 25px rgba(0,0,0,0.12);
+}
 
 .rate-box{
 width:90%;
+}
+
+}
+@media(max-width:768px){
+
+.products{
+padding:20px;
+}
+
+.product-card{
+margin-bottom:20px;
+}
+
+.product-card img{
+width:100%;
+height:auto;
 }
 
 }

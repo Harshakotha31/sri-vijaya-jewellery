@@ -102,37 +102,46 @@ setInterval(loadRates, 60000);
 <script>
 async function loadRates(){
     try{
+        // fallback USD prices (stable source)
         const res = await fetch(
           "https://api.metals.live/v1/spot"
         );
         const data = await res.json();
 
-        let gold = data.find(x => x.gold)?.gold;
-        let silver = data.find(x => x.silver)?.silver;
+        let goldUSD = data.find(x => x.gold)?.gold;
+        let silverUSD = data.find(x => x.silver)?.silver;
 
-        // convert to approx INR per gram
-        gold = Math.round((gold * 83) / 31.1035);
-        silver = Math.round((silver * 83) / 31.1035);
+        if(!goldUSD || !silverUSD) throw "No data";
+
+        // convert to INR per gram (approx India market)
+        const usdToInr = 83;
+
+        let gold999 = (goldUSD * usdToInr) / 31.1035;
+        let silver999 = (silverUSD * usdToInr) / 31.1035;
+
+        // jewellery style rates
+        let gold22k = Math.round(gold999 * 0.916);
+        let silverRate = Math.round(silver999);
 
         document.getElementById("goldRate").innerText =
-            "Gold (22K/gram): ₹" + gold;
+          "Gold 22K (1g): ₹" + gold22k;
 
         document.getElementById("silverRate").innerText =
-            "Silver (1g): ₹" + silver;
+          "Silver 999 (1g): ₹" + silverRate;
 
     }catch(e){
-        console.log("Rate load error", e);
         document.getElementById("goldRate").innerText =
-            "Gold rate unavailable";
+          "Gold rate updating…";
 
         document.getElementById("silverRate").innerText =
-            "Silver rate unavailable";
+          "Silver rate updating…";
+
+        console.log(e);
     }
 }
 
 loadRates();
-setInterval(loadRates, 300000); // refresh every 5 min
+setInterval(loadRates, 300000); // every 5 min
 </script>
-
 </body>
 </html>
