@@ -42,8 +42,23 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
     <div class="rate-box">
         <h3>📊 Today's Gold & Silver Rate</h3>
-        <p id="goldRate">Gold: Loading...</p>
-        <p id="silverRate">Silver: Loading...</p>
+       <p id="goldRate">
+Gold 22K (1g):
+{% if gold_rate %}
+₹{{ gold_rate }}
+{% else %}
+Updating...
+{% endif %}
+</p>
+
+<p id="silverRate">
+Silver 999 (1g):
+{% if silver_rate %}
+₹{{ silver_rate }}
+{% else %}
+Updating...
+{% endif %}
+</p>
     </div>
 <section class="products">
     <h2>Our Silver Collections</h2>
@@ -99,44 +114,7 @@ async function loadRates(){
 loadRates();
 setInterval(loadRates, 60000);
 </script>
-<script>
-async function loadRates(){
 
-    // ⚡ instant fallback (shows immediately)
-    document.getElementById("goldRate").innerText =
-      "Gold 22K (1g): ₹ loading…";
-
-    document.getElementById("silverRate").innerText =
-      "Silver 999 (1g): ₹ loading…";
-
-    try{
-        const res = await fetch("https://api.metals.live/v1/spot");
-        const data = await res.json();
-
-        let goldUSD = data.find(x => x.gold)?.gold;
-        let silverUSD = data.find(x => x.silver)?.silver;
-
-        const usdToInr = 83;
-
-        let gold999 = (goldUSD * usdToInr) / 31.1035;
-        let silver999 = (silverUSD * usdToInr) / 31.1035;
-
-        let gold22k = Math.round(gold999 * 0.916);
-        let silverRate = Math.round(silver999);
-
-        document.getElementById("goldRate").innerText =
-          "Gold 22K (1g): ₹" + gold22k;
-
-        document.getElementById("silverRate").innerText =
-          "Silver 999 (1g): ₹" + silverRate;
-
-    }catch(e){
-        console.log("Rate error:", e);
-    }
-}
-
-loadRates();
-setInterval(loadRates, 300000);
 </script>
 </body>
 </html>
