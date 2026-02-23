@@ -45,21 +45,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         <p id="goldRate">Gold: Loading...</p>
         <p id="silverRate">Silver: Loading...</p>
     </div>
-</section>
-    <h1>Premium Silver Collections</h1>
-    <p>Trusted Jewellery Store in Narasaraopet</p>
-    <a href="https://wa.me/916302488411" class="btn">💬 Chat Now</a>
-
-    <p style="margin-top:12px;font-weight:500;">
-    Follow us on Instagram for more updates ✨
-    </p>
-
-    <div class="rate-box">
-        <h3>📊 Today's Gold & Silver Rate</h3>
-        <p id="goldRate">Gold: Loading...</p>
-        <p id="silverRate">Silver: Loading...</p>
-    </div>
-</section>
 <section class="products">
     <h2>Our Silver Collections</h2>
 
@@ -113,6 +98,40 @@ async function loadRates(){
 }
 loadRates();
 setInterval(loadRates, 60000);
+</script>
+<script>
+async function loadRates(){
+    try{
+        const res = await fetch(
+          "https://api.metals.live/v1/spot"
+        );
+        const data = await res.json();
+
+        let gold = data.find(x => x.gold)?.gold;
+        let silver = data.find(x => x.silver)?.silver;
+
+        // convert to approx INR per gram
+        gold = Math.round((gold * 83) / 31.1035);
+        silver = Math.round((silver * 83) / 31.1035);
+
+        document.getElementById("goldRate").innerText =
+            "Gold (22K/gram): ₹" + gold;
+
+        document.getElementById("silverRate").innerText =
+            "Silver (1g): ₹" + silver;
+
+    }catch(e){
+        console.log("Rate load error", e);
+        document.getElementById("goldRate").innerText =
+            "Gold rate unavailable";
+
+        document.getElementById("silverRate").innerText =
+            "Silver rate unavailable";
+    }
+}
+
+loadRates();
+setInterval(loadRates, 300000); // refresh every 5 min
 </script>
 
 </body>

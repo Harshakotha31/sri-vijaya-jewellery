@@ -43,3 +43,24 @@ gap:6px;
 .insta-btn:hover{
 opacity:0.9;
 }
+@media(max-width:600px){
+
+.navbar{
+flex-direction:column;
+gap:10px;
+}
+
+.nav-actions{
+width:100%;
+justify-content:center;
+}
+
+.hero h1{
+font-size:28px;
+}
+
+.rate-box{
+width:90%;
+}
+
+}
