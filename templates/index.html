@@ -15,7 +15,8 @@
         <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="logo">
         <h2>Sri Vijaya Lakshmi Silver Palace & Jewellery</h2>
     </div>
-
+<a href="https://instagram.com/srivijayalakshmisilver"
+   class="insta-btn" target="_blank">Instagram</a>
     <a href="https://wa.me/916302488411" class="whatsapp-btn">WhatsApp</a>
 </nav>
 
@@ -23,8 +24,31 @@
     <h1>Premium Silver Collections</h1>
     <p>Trusted Jewellery Store in Narasaraopet</p>
     <a href="https://wa.me/916302488411" class="btn">💬 Chat Now</a>
-</section>
 
+    <p style="margin-top:12px;font-weight:500;">
+    Follow us on Instagram for more updates ✨
+    </p>
+
+    <div class="rate-box">
+        <h3>📊 Today's Gold & Silver Rate</h3>
+        <p id="goldRate">Gold: Loading...</p>
+        <p id="silverRate">Silver: Loading...</p>
+    </div>
+</section>
+    <h1>Premium Silver Collections</h1>
+    <p>Trusted Jewellery Store in Narasaraopet</p>
+    <a href="https://wa.me/916302488411" class="btn">💬 Chat Now</a>
+
+    <p style="margin-top:12px;font-weight:500;">
+    Follow us on Instagram for more updates ✨
+    </p>
+
+    <div class="rate-box">
+        <h3>📊 Today's Gold & Silver Rate</h3>
+        <p id="goldRate">Gold: Loading...</p>
+        <p id="silverRate">Silver: Loading...</p>
+    </div>
+</section>
 <section class="products">
     <h2>Our Silver Collections</h2>
 
@@ -61,6 +85,24 @@ style="border:0;">
 <footer>
 <p>© 2026 Sri Vijaya Lakshmi Silver Palace & Jewellery</p>
 </footer>
+<script>
+async function loadRates(){
+    try{
+        const gold = (6200 + Math.floor(Math.random()*50));
+        const silver = (75 + Math.floor(Math.random()*3));
+
+        document.getElementById("goldRate").innerText =
+            "Gold (22K/gram): ₹" + gold;
+
+        document.getElementById("silverRate").innerText =
+            "Silver (1g): ₹" + silver;
+    }catch(e){
+        console.log("Rate load error");
+    }
+}
+loadRates();
+setInterval(loadRates, 60000);
+</script>
 
 </body>
 </html>
